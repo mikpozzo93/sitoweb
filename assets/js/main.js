@@ -394,6 +394,112 @@
     io.observe($('#contatti'));
   }
 
+  /* ---------- Motion: reveals, count-ups, lit statement, slider pass ----------
+     Runs only when the inline bootstrap added "motion" (no reduced-motion request). */
+  if (document.documentElement.classList.contains('motion')) {
+    const ease = (k) => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+
+    const countUp = (dt) => {
+      const final = dt.textContent.trim();
+      const m = final.match(/^(\d+)(.*)$/);
+      if (!m) return;
+      const target = Number(m[1]);
+      const suffix = m[2];
+      dt.textContent = '';
+      const shown = document.createElement('span');
+      shown.setAttribute('aria-hidden', 'true');
+      const spoken = document.createElement('span');
+      spoken.className = 'sr-only';
+      spoken.textContent = final;
+      dt.append(shown, spoken);
+      const t0 = performance.now() + 250;
+      const tick = (t) => {
+        const k = Math.min(1, Math.max(0, (t - t0) / 1400));
+        shown.textContent = `${Math.round(target * (1 - Math.pow(1 - k, 3)))}${suffix}`;
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+
+    // The before/after slider sweeps once into place, unless the visitor got there first.
+    let touched = false;
+    if (range) ['pointerdown', 'keydown'].forEach((ev) => range.addEventListener(ev, () => { touched = true; }));
+    const sweep = () => {
+      if (!range || touched) return;
+      const end = Number(range.value);
+      const start = Math.min(96, end + 40);
+      const t0 = performance.now() + 450;
+      const set = (v) => { range.value = String(Math.round(v)); range.dispatchEvent(new Event('input')); };
+      const step = (t) => {
+        if (touched) return;
+        const k = Math.min(1, Math.max(0, (t - t0) / 1500));
+        set(start + (end - start) * ease(k));
+        if (k < 1) requestAnimationFrame(step);
+      };
+      set(start);
+      requestAnimationFrame(step);
+    };
+
+    const groups = [
+      ['.article-head > div:first-child, .section-head, .manifesto-copy, .value-copy, .checkup-intro, .band-copy, .lab-intro, .service-strip, .compare-table-wrap, .footer-mark', 'single'],
+      ['.margin-notes .comment, .pain, .stake, .comma, .service, .step, .value, .q, .faq', 'stagger'],
+      ['.cost-chart, .team, .compare, .pattern, .story, .contact', 'scale'],
+    ];
+    const targets = [];
+    groups.forEach(([sel, kind]) => $$(sel).forEach((el) => {
+      if (el.closest('.hero') || el.hasAttribute('data-reveal')) return;
+      el.setAttribute('data-reveal', kind === 'scale' ? 'scale' : '');
+      if (kind === 'stagger') {
+        const i = Array.prototype.indexOf.call(el.parentElement.children, el);
+        el.style.setProperty('--d', `${Math.min(i, 6) * 0.09}s`);
+      }
+      targets.push(el);
+    }));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        el.classList.add('is-in');
+        if (el.classList.contains('stake')) countUp(el.querySelector('dt'));
+        if (el === compare) sweep();
+        io.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    targets.forEach((el) => io.observe(el));
+
+    // Manifesto statement: words light up as it travels up the screen.
+    const statement = $('#statement');
+    if (statement) {
+      const words = statement.textContent.trim().split(/\s+/);
+      statement.textContent = '';
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.className = 'w';
+        span.textContent = w;
+        statement.append(span);
+        if (i < words.length - 1) statement.append(' ');
+      });
+      const spans = $$('.w', statement);
+      let lit = -1;
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const r = statement.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height + vh * 0.35)));
+        const n = Math.round(p * spans.length);
+        if (n === lit) return;
+        spans.forEach((s, i) => s.classList.toggle('is-lit', i < n));
+        lit = n;
+      };
+      const onScrollLit = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+      window.addEventListener('scroll', onScrollLit, { passive: true });
+      window.addEventListener('resize', onScrollLit);
+      update();
+    }
+  }
+
   /* ---------- Footer year ---------- */
   const year = $('#year');
   if (year) year.textContent = String(new Date().getFullYear());

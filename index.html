@@ -6,7 +6,7 @@
   <title>Legal Product Studio · Law, by design.</title>
   <meta name="claude:viewport-fit-sides" content="cover">
   <meta name="description" content="Legal Product Studio. Portiamo il giurista dentro il tuo team di prodotto dal primo giorno: prodotti digitali trasparenti, etici e conformi a GDPR, AI Act ed European Accessibility Act.">
-  <meta name="theme-color" content="#2B36D9">
+  <meta name="theme-color" content="#F5F6FB">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
   <meta property="og:title" content="Legal Product Studio · Law, by design.">
@@ -20,6 +20,12 @@
 </head>
 <body>
 <!-- BODY:START -->
+<script>
+  // Motion is opt-out: skipped for visitors who ask the system for reduced motion.
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('motion');
+  }
+</script>
 <svg class="sprite" aria-hidden="true" focusable="false">
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v13M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -208,7 +214,7 @@
                 <line x1="50" y1="90" x2="505" y2="90" class="faint"/>
               </g>
               <path class="chart-area" d="M70 232 C 150 228, 200 222, 240 210 S 330 170, 365 128 S 445 52, 470 44 L 470 240 L 70 240 Z"/>
-              <path class="chart-line" d="M70 232 C 150 228, 200 222, 240 210 S 330 170, 365 128 S 445 52, 470 44"/>
+              <path class="chart-line" pathLength="1" d="M70 232 C 150 228, 200 222, 240 210 S 330 170, 365 128 S 445 52, 470 44"/>
               <g class="chart-x">
                 <text x="70" y="266">Idea</text>
                 <text x="168" y="266" class="x-minor">Prototipo</text>
@@ -260,7 +266,7 @@
         <div class="manifesto-copy">
           <p class="eyebrow"><span class="art">Art. 2</span> Manifesto</p>
           <h2 class="h2" id="manifesto-title">Il giurista <em>nel</em> prodotto. Non <span class="strike">intorno</span>.</h2>
-          <p class="lead">Non siamo consulenti in toga a cui chiedere un parere a cose fatte. Entriamo nel team di prodotto con product owner, UX/UI designer, sviluppatori e business. Condividiamo backlog, sprint e retrospettive, e con loro la responsabilità delle scelte.</p>
+          <p class="lead">Al tavolo di prodotto c’è un posto per il diritto. Lo occupiamo noi, dal primo giorno, accanto a product owner, designer, sviluppatori e business.</p>
         </div>
 
         <div class="team" id="team">
@@ -281,6 +287,8 @@
           </div>
         </div>
       </div>
+
+      <p class="statement" id="statement">Non siamo consulenti in toga a cui chiedere un parere a cose fatte. Entriamo nel team, condividiamo backlog, sprint e retrospettive. E la responsabilità delle scelte.</p>
 
       <ol class="commi">
         <li class="comma">
@@ -829,7 +837,7 @@
         </div>
         <p class="form-privacy field-wide">Usiamo questi dati solo per risponderti. Niente newsletter, niente terze parti. <button type="button" class="link-btn" data-open-privacy>Privacy in breve</button></p>
         <div class="form-actions field-wide">
-          <button type="submit" class="btn btn-invert btn-lg">Prenota la Discovery Call <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button type="submit" class="btn btn-primary btn-lg">Prenota la Discovery Call <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </div>
         <p class="form-status field-wide" id="form-status" role="status" hidden></p>
       </form>

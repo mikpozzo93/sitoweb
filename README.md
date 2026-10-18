@@ -1,1 +1,57 @@
-# sitoweb2
+# Codice Umano · Legal Product Design
+
+Sito one-page per uno studio che porta il **giurista designer** dentro i team di prodotto digitali: legal design, Value Sensitive Design e FRIA, accessibilità (European Accessibility Act) e audit dei dark pattern.
+
+Statico, senza build e senza dipendenze: HTML, CSS e JavaScript puri.
+
+## Avvio in locale
+
+```bash
+python3 -m http.server 8000
+# poi apri http://localhost:8000
+```
+
+## Struttura
+
+```
+index.html              pagina unica
+assets/css/fonts.css    @font-face dei caratteri ospitati in locale
+assets/css/styles.css   design token (colori, tipografia, spazi) e stili
+assets/js/main.js       interazioni (revisioni nell'hero, slider prima/dopo,
+                        dark vs fair pattern, tab norma → user story,
+                        autovalutazione, modulo contatti)
+assets/fonts/           Bodoni Moda e Atkinson Hyperlegible (licenza SIL OFL)
+assets/img/             favicon e immagine di anteprima per i social
+```
+
+## Sezioni
+
+| Ancora | Contenuto |
+| --- | --- |
+| `#top` | Hero con revisione "track changes" dal legalese all'italiano chiaro, con indice Gulpease calcolato dal vivo |
+| `#problema` | Art. 1: il legale che arriva alla fine, curva del costo di una modifica, sanzioni GDPR e AI Act |
+| `#manifesto` | Art. 2: il giurista *nel* prodotto, team interattivo, cinque commi di principi |
+| `#servizi` | Art. 3: Legal Copilot, Legal Design & Content, VSD & FRIA, Accessibilità, Fair Pattern Audit |
+| `#laboratorio` | Art. 4: slider prima/dopo, dark vs fair pattern, dalla norma alla user story |
+| `#metodo` | Art. 5: Discovery, Co-design, Build, Rilascio e cura |
+| `#valore` | Art. 6: valore di business e confronto con la consulenza tradizionale |
+| `#checkup` | Autovalutazione "compliant o virtuoso?" con timbro finale |
+| `#faq` | Art. 7: domande frequenti |
+| `#contatti` | Modulo per la Discovery Call |
+
+## Prima di andare online
+
+1. **Dati dello studio.** Sostituisci `ciao@codiceumano.it` (compare in `index.html` e nell'attributo `data-email` del modulo), `P.IVA 00000000000` nel footer e `[ragione sociale e indirizzo]` nella finestra "Privacy in breve".
+2. **Modulo contatti.** Senza configurazione apre il programma di posta del visitatore con la richiesta già compilata. Per ricevere le richieste direttamente, imposta nel `<form id="contact-form">` l'attributo `data-endpoint` con l'URL di un servizio di form (per esempio Formspree): il modulo invierà i dati in POST.
+3. **Nome del brand.** "Codice Umano" è un nome di lavoro: codice come codice civile e codice sorgente, umano come il Value Sensitive Design.
+4. **Contenuti legali.** I riferimenti normativi (art. 7 e 83 GDPR, art. 50 e 99 AI Act, Direttiva (UE) 2019/882 e D.Lgs. 82/2022, art. 33 Codice del Consumo, linee guida EDPB e Garante) vanno fatti rivedere dal giurista dello studio prima della pubblicazione.
+
+## Scelte di progetto
+
+- **Il sito pratica ciò che vende.** Nessun cookie, nessun tracker, nessuna richiesta a terze parti (i font sono ospitati in locale), navigazione da tastiera, link "Vai al contenuto", focus visibile, contrasti AA, rispetto di `prefers-reduced-motion` e tema scuro automatico.
+- **Tipografia.** Bodoni Moda per i titoli, omaggio alla tradizione tipografica italiana; Atkinson Hyperlegible per i testi, il carattere progettato dal Braille Institute per chi ha una vista ridotta.
+- **Linguaggio visivo.** La pagina è uno "statuto in revisione": articoli e commi, testo barrato in rosso e inserimenti in blu come nelle revisioni di un documento, commenti a margine del team, timbro finale.
+
+## Pubblicazione
+
+Funziona su qualsiasi hosting statico. Con GitHub Pages: *Settings → Pages → Deploy from a branch*, cartella root.

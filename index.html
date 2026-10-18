@@ -14,7 +14,6 @@
   <meta property="og:image" content="assets/img/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/fonts/bodoni-moda-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/fonts.css">
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -95,7 +94,7 @@
             <span class="revision-file" id="rev-file">informativa_privacy_v7.docx</span>
             <span class="revision-mode">Revisioni attive</span>
           </header>
-          <div class="revision-body" aria-live="polite">
+          <div class="revision-body" id="rev-body" aria-live="off">
             <p class="revision-label">Prima</p>
             <p class="revision-old"><del id="rev-old">Il Titolare del trattamento, ai sensi e per gli effetti dell'art. 13 del Regolamento (UE) 2016/679, informa l'Interessato che i dati personali dal medesimo conferiti saranno oggetto di trattamento, con modalità prevalentemente informatizzate, per le finalità connesse all'esecuzione degli obblighi contrattuali di cui al successivo punto 3.2, lett. b), nonché per l'adempimento degli obblighi di legge cui il Titolare è soggetto.</del></p>
             <p class="revision-label">Dopo</p>
@@ -104,24 +103,24 @@
           <dl class="revision-metrics">
             <div>
               <dt>Indice Gulpease</dt>
-              <dd><span class="m-old" id="rev-g-old">40</span><svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="m-new" id="rev-g-new">73</span></dd>
+              <dd><span class="sr-only">da </span><span class="m-old" id="rev-g-old">40</span><svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only"> a </span><span class="m-new" id="rev-g-new">73</span></dd>
             </div>
             <div>
               <dt>Parole</dt>
-              <dd><span class="m-old" id="rev-w-old">63</span><svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="m-new" id="rev-w-new">26</span></dd>
+              <dd><span class="sr-only">da </span><span class="m-old" id="rev-w-old">63</span><svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only"> a </span><span class="m-new" id="rev-w-new">26</span></dd>
             </div>
             <div>
               <dt>Lettura</dt>
-              <dd><span class="m-old" id="rev-t-old">19 s</span><svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="m-new" id="rev-t-new">8 s</span></dd>
+              <dd><span class="sr-only">da </span><span class="m-old" id="rev-t-old">19 s</span><svg aria-hidden="true"><use href="#i-arrow"/></svg><span class="sr-only"> a </span><span class="m-new" id="rev-t-new">8 s</span></dd>
             </div>
           </dl>
-          <aside class="comment comment-revision">
+          <div role="note" class="comment comment-revision">
             <span class="avatar avatar-gd" aria-hidden="true">GD</span>
             <div>
               <p class="comment-who">Giurista designer</p>
               <p class="comment-text" id="rev-comment">Stesse informazioni richieste dall'art. 13 GDPR, in meno della metà delle parole. Il dettaglio resta disponibile al secondo livello.</p>
             </div>
-          </aside>
+          </div>
           <footer class="revision-controls">
             <button class="icon-btn" type="button" id="rev-prev" aria-label="Esempio precedente"><svg aria-hidden="true"><use href="#i-prev"/></svg></button>
             <span class="revision-count" id="rev-count">1 / 3</span>
@@ -160,20 +159,20 @@
           <p class="lead">Nel modello tradizionale il giurista resta fuori dal team. Riceve il prodotto finito, lo legge ed emette un parere, spesso bloccante. Il risultato sono sprint da rifare, lanci rimandati e informative incollate all'ultimo minuto che nessuno legge.</p>
         </div>
         <div class="margin-notes" aria-label="Uno scambio tipico, tre giorni prima del lancio">
-          <aside class="comment">
+          <div role="note" class="comment">
             <span class="avatar avatar-ext" aria-hidden="true">LE</span>
             <div>
               <p class="comment-who">Legale esterno <span>· 3 giorni al lancio</span></p>
               <p class="comment-text">Il flusso di consenso non è conforme. Va rifatto.</p>
             </div>
-          </aside>
-          <aside class="comment comment-reply">
+          </div>
+          <div role="note" class="comment comment-reply">
             <span class="avatar avatar-po" aria-hidden="true">PO</span>
             <div>
               <p class="comment-who">Product owner</p>
               <p class="comment-text">Non potevamo saperlo a gennaio?</p>
             </div>
-          </aside>
+          </div>
         </div>
       </div>
 
@@ -230,6 +229,10 @@
               </g>
             </svg>
           </div>
+          <ul class="chart-legend">
+            <li><span class="dot dot-us" aria-hidden="true"></span>Noi entriamo qui: fase di idea</li>
+            <li><span class="dot dot-them" aria-hidden="true"></span>Il legale tradizionale entra qui: rilascio</li>
+          </ul>
         </figure>
 
         <dl class="stakes">
@@ -320,7 +323,7 @@
       <div class="services">
         <article class="service">
           <p class="service-tag">Team</p>
-          <h3 class="service-title">In-Product Legal Copilot</h3>
+          <h3 class="service-title" lang="en">In-Product Legal Copilot</h3>
           <p class="service-desc">Un giurista designer dedicato, integrato nel tuo team Agile. Partecipa a refinement, planning e review e intercetta i rischi prima che diventino codice.</p>
           <h4 class="service-sub">Cosa ricevi</h4>
           <ul class="ticks">
@@ -330,12 +333,12 @@
             <li>Un canale diretto con il team</li>
           </ul>
           <p class="service-for"><span>Per chi</span>Scale-up e prodotti che rilasciano spesso.</p>
-          <a class="service-cta" href="#contatti" data-service="copilot">Parliamone <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="service-cta" href="#contatti" data-service="copilot">Parliamone<span class="sr-only"> di In-Product Legal Copilot</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
 
         <article class="service">
           <p class="service-tag">Contenuti</p>
-          <h3 class="service-title">Legal Design &amp; Content</h3>
+          <h3 class="service-title" lang="en">Legal Design &amp; Content</h3>
           <p class="service-desc">Termini di servizio, privacy policy e cookie policy diventano componenti chiari, dinamici e interattivi, integrati nel flusso dell'esperienza.</p>
           <h4 class="service-sub">Cosa ricevi</h4>
           <ul class="ticks">
@@ -345,12 +348,12 @@
             <li>Componenti legali per il tuo design system</li>
           </ul>
           <p class="service-for"><span>Per chi</span>App consumer, e-commerce, SaaS.</p>
-          <a class="service-cta" href="#contatti" data-service="design">Parliamone <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="service-cta" href="#contatti" data-service="design">Parliamone<span class="sr-only"> di Legal Design &amp; Content</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
 
         <article class="service">
           <p class="service-tag">Valori</p>
-          <h3 class="service-title">Value Sensitive Design &amp; FRIA</h3>
+          <h3 class="service-title" lang="en">Value Sensitive Design &amp; FRIA</h3>
           <p class="service-desc">Portiamo nel processo i valori delle persone, accanto ai loro bisogni. Valutiamo l'impatto di sistemi digitali e intelligenza artificiale sui diritti fondamentali prima del rilascio.</p>
           <h4 class="service-sub">Cosa ricevi</h4>
           <ul class="ticks">
@@ -360,7 +363,7 @@
             <li>Raccomandazioni pronte per il backlog</li>
           </ul>
           <p class="service-for"><span>Per chi</span>Prodotti con AI, HealthTech, FinTech, PA.</p>
-          <a class="service-cta" href="#contatti" data-service="vsd">Parliamone <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="service-cta" href="#contatti" data-service="vsd">Parliamone<span class="sr-only"> di Value Sensitive Design &amp; FRIA</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
 
         <article class="service">
@@ -375,14 +378,14 @@
             <li>Formazione del team</li>
           </ul>
           <p class="service-for"><span>Per chi</span>E-commerce, banking, servizi digitali al consumatore.</p>
-          <a class="service-cta" href="#contatti" data-service="a11y">Parliamone <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="service-cta" href="#contatti" data-service="a11y">Parliamone<span class="sr-only"> di Accessibilità digitale</span> <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
       </div>
 
       <div class="service-strip">
         <div>
           <p class="service-tag">Audit</p>
-          <h3 class="service-title">Fair Pattern Audit</h3>
+          <h3 class="service-title" lang="en">Fair Pattern Audit</h3>
           <p>Analizziamo i tuoi flussi, troviamo i dark pattern e li sostituiamo con percorsi fluidi e trasparenti.</p>
         </div>
         <a class="btn btn-ghost" href="#lab-pattern">Prova la differenza <svg aria-hidden="true"><use href="#i-down"/></svg></a>
@@ -468,7 +471,7 @@
         </div>
 
         <div class="pattern" id="pattern" data-mode="dark">
-          <div class="browser">
+          <div class="browser" id="browser" role="img" aria-label="Banner cookie con dark pattern: un grande pulsante Accetta e continua, caselle già spuntate e un piccolo link altre opzioni al posto del pulsante Rifiuta.">
             <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>negozio-esempio.it</span></div>
             <div class="browser-page" aria-hidden="true">
               <span class="ph ph-hero"></span><span class="ph"></span><span class="ph ph-short"></span>
@@ -613,19 +616,19 @@
       <ol class="steps">
         <li class="step">
           <span class="step-num">01</span>
-          <h3>Discovery</h3>
+          <h3 lang="en">Discovery</h3>
           <p>Mappiamo utenti, stakeholder, valori e norme applicabili. Ne esce una mappa condivisa dal team: cosa serve, cosa rischiamo, cosa vogliamo garantire.</p>
           <p class="step-out"><span>Risultato</span>Legal &amp; Value Map</p>
         </li>
         <li class="step">
           <span class="step-num">02</span>
-          <h3>Co-design</h3>
+          <h3 lang="en">Co-design</h3>
           <p>Al tavolo di prototipazione con UX e UI. I vincoli diventano pattern, i consensi diventano microinterazioni, le informative diventano componenti.</p>
           <p class="step-out"><span>Risultato</span>Prototipi validati</p>
         </li>
         <li class="step">
           <span class="step-num">03</span>
-          <h3>Build</h3>
+          <h3 lang="en">Build</h3>
           <p>Requisiti legali scritti come user story e acceptance criteria. Revisioniamo flussi e testi dentro lo sprint, prima del merge.</p>
           <p class="step-out"><span>Risultato</span>Backlog pronto per lo sviluppo</p>
         </li>
@@ -649,8 +652,8 @@
           <p class="lead">I prodotti digitali più usati sono quelli in cui le persone si sentono rispettate, protette e mai manipolate. Privacy e accessibilità fatte bene sono un vantaggio competitivo.</p>
         </div>
         <dl class="values">
-          <div class="value"><dt>Retention</dt><dd>Chi si fida resta, e consiglia il prodotto ad altri.</dd></div>
-          <div class="value"><dt>Time-to-market</dt><dd>I vincoli sono già nel backlog. Nessuno stop a ridosso del lancio.</dd></div>
+          <div class="value"><dt lang="en">Retention</dt><dd>Chi si fida resta, e consiglia il prodotto ad altri.</dd></div>
+          <div class="value"><dt lang="en">Time-to-market</dt><dd>I vincoli sono già nel backlog. Nessuno stop a ridosso del lancio.</dd></div>
           <div class="value"><dt>Posizionamento</dt><dd>Trasparenza e approccio ESG visibili nell'interfaccia, dove i clienti li notano.</dd></div>
           <div class="value"><dt>Rischio</dt><dd>Prevenzione al posto del contenzioso. Meno sanzioni, meno sorprese.</dd></div>
         </dl>
@@ -667,13 +670,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row">Quando entra in gioco</th><td data-label="Tradizionale"><del>A prodotto finito</del></td><td data-label="Codice Umano" class="vs-us">Dal primo wireframe</td></tr>
-            <tr><th scope="row">Cosa consegna</th><td data-label="Tradizionale"><del>Un parere scritto</del></td><td data-label="Codice Umano" class="vs-us">Flussi, componenti e user story</td></tr>
-            <tr><th scope="row">Che lingua parla</th><td data-label="Tradizionale"><del>Legalese</del></td><td data-label="Codice Umano" class="vs-us">La lingua del tuo team</td></tr>
-            <tr><th scope="row">Obiettivo</th><td data-label="Tradizionale"><del>Essere compliant</del></td><td data-label="Codice Umano" class="vs-us">Essere virtuosi</td></tr>
-            <tr><th scope="row">Le informative</th><td data-label="Tradizionale"><del>80 pagine da accettare</del></td><td data-label="Codice Umano" class="vs-us">Componenti chiari e interattivi</td></tr>
-            <tr><th scope="row">Il ruolo</th><td data-label="Tradizionale"><del>Controllore esterno</del></td><td data-label="Codice Umano" class="vs-us">Membro del team, corresponsabile</td></tr>
-            <tr><th scope="row">Effetto sul team</th><td data-label="Tradizionale"><del>Paura del no</del></td><td data-label="Codice Umano" class="vs-us">Fiducia reciproca</td></tr>
+            <tr><th scope="row">Quando entra in gioco</th><td data-label="Tradizionale" class="vs-old">A prodotto finito</td><td data-label="Codice Umano" class="vs-us">Dal primo wireframe</td></tr>
+            <tr><th scope="row">Cosa consegna</th><td data-label="Tradizionale" class="vs-old">Un parere scritto</td><td data-label="Codice Umano" class="vs-us">Flussi, componenti e user story</td></tr>
+            <tr><th scope="row">Che lingua parla</th><td data-label="Tradizionale" class="vs-old">Legalese</td><td data-label="Codice Umano" class="vs-us">La lingua del tuo team</td></tr>
+            <tr><th scope="row">Obiettivo</th><td data-label="Tradizionale" class="vs-old">Essere compliant</td><td data-label="Codice Umano" class="vs-us">Essere virtuosi</td></tr>
+            <tr><th scope="row">Le informative</th><td data-label="Tradizionale" class="vs-old">80 pagine da accettare</td><td data-label="Codice Umano" class="vs-us">Componenti chiari e interattivi</td></tr>
+            <tr><th scope="row">Il ruolo</th><td data-label="Tradizionale" class="vs-old">Controllore esterno</td><td data-label="Codice Umano" class="vs-us">Membro del team, corresponsabile</td></tr>
+            <tr><th scope="row">Effetto sul team</th><td data-label="Tradizionale" class="vs-old">Paura del no</td><td data-label="Codice Umano" class="vs-us">Fiducia reciproca</td></tr>
           </tbody>
         </table>
       </div>
@@ -799,16 +802,17 @@
       <!-- Set data-endpoint to a form service URL (e.g. Formspree) to send via POST; leave empty to open the visitor's email client. -->
       <form class="contact" id="contact-form" data-endpoint="" data-email="ciao@codiceumano.it" novalidate>
         <div class="field">
-          <label for="f-name">Nome e cognome</label>
+          <label for="f-name">Nome e cognome <span class="req">(obbligatorio)</span></label>
           <input id="f-name" name="nome" type="text" autocomplete="name" required>
         </div>
         <div class="field">
-          <label for="f-email">Email di lavoro</label>
+          <label for="f-email">Email di lavoro <span class="req">(obbligatorio)</span></label>
           <input id="f-email" name="email" type="email" autocomplete="email" required>
         </div>
         <div class="field field-wide">
           <label for="f-company">Azienda e prodotto</label>
-          <input id="f-company" name="azienda" type="text" autocomplete="organization" placeholder="Es. Rossi S.r.l., app di prenotazione visite">
+          <p class="field-hint" id="f-company-hint">Per esempio: Rossi S.r.l., app di prenotazione visite.</p>
+          <input id="f-company" name="azienda" type="text" autocomplete="organization" aria-describedby="f-company-hint">
         </div>
         <fieldset class="field field-wide chips">
           <legend>Di cosa hai bisogno?</legend>
@@ -839,7 +843,7 @@
     <div class="footer-grid">
       <div class="footer-about">
         <p class="footer-tag">Studio di Legal Product Design</p>
-        <p class="footer-honest"><strong>Predichiamo bene e razzoliamo bene.</strong> Questo sito non usa cookie né tracker, ospita da sé i propri caratteri, si naviga da tastiera e rispetta chi preferisce meno animazioni. I testi sono composti in Atkinson Hyperlegible, un carattere progettato dal Braille Institute per chi ha una vista ridotta.</p>
+        <p class="footer-honest"><strong>Predichiamo bene e razzoliamo bene.</strong> Questo sito non usa cookie né tracker, ospita da sé i propri caratteri, si naviga da tastiera e rispetta chi preferisce meno animazioni. Tutti i testi sono composti in Atkinson Hyperlegible, il carattere progettato dal Braille Institute per chi ha una vista ridotta, senza corsivi né maiuscole spaziate.</p>
       </div>
       <nav class="footer-nav" aria-label="Studio">
         <p class="footer-h">Studio</p>

@@ -20,7 +20,7 @@ assets/css/styles.css   design token (colori, tipografia, spazi) e stili
 assets/js/main.js       interazioni (revisioni nell'hero, slider prima/dopo,
                         dark vs fair pattern, tab norma → user story,
                         autovalutazione, modulo contatti)
-assets/fonts/           Bodoni Moda e Atkinson Hyperlegible (licenza SIL OFL)
+assets/fonts/           Atkinson Hyperlegible Next e Mono (licenza SIL OFL)
 assets/img/             favicon e immagine di anteprima per i social
 ```
 
@@ -48,8 +48,9 @@ assets/img/             favicon e immagine di anteprima per i social
 
 ## Scelte di progetto
 
-- **Il sito pratica ciò che vende.** Nessun cookie, nessun tracker, nessuna richiesta a terze parti (i font sono ospitati in locale), navigazione da tastiera, link "Vai al contenuto", focus visibile, contrasti AA, rispetto di `prefers-reduced-motion` e tema scuro automatico.
-- **Tipografia.** Bodoni Moda per i titoli, omaggio alla tradizione tipografica italiana; Atkinson Hyperlegible per i testi, il carattere progettato dal Braille Institute per chi ha una vista ridotta.
+- **Il sito pratica ciò che vende.** Nessun cookie, nessun tracker, nessuna richiesta a terze parti (i font sono ospitati in locale), navigazione da tastiera, link "Vai al contenuto", focus visibile e mai coperto dalle barre fisse, pulsanti da almeno 44 px, carosello che non si annuncia da solo e si mette in pausa, rispetto di `prefers-reduced-motion` e tema scuro automatico. Verificato con axe-core (WCAG 2.2 AA, nessuna violazione).
+- **Tipografia.** Un solo carattere, Atkinson Hyperlegible, progettato dal Braille Institute per chi ha una vista ridotta: titoli in grassetto, niente corsivi, niente maiuscole spaziate, nessun testo sotto i 14 px. Il barrato compare solo su parole brevi del motivo "revisioni"; i testi lunghi restano sempre leggibili.
+- **Contrasti.** Tutte le coppie testo/sfondo superano WCAG 2.2 AA in entrambi i temi e, per il testo corrente, la soglia APCA Lc 60. I bordi dei campi del modulo superano 3:1.
 - **Linguaggio visivo.** La pagina è uno "statuto in revisione": articoli e commi, testo barrato in rosso e inserimenti in blu come nelle revisioni di un documento, commenti a margine del team, timbro finale.
 
 ## Pubblicazione

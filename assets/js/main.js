@@ -111,10 +111,13 @@
       index = (index + step + examples.length) % examples.length;
       render(index, true);
     };
+    const body = $('#rev-body');
+    // Announce changes only when the visitor asked for them, never on auto-rotation.
+    const announce = (on) => body.setAttribute('aria-live', on ? 'polite' : 'off');
     const stop = () => { clearInterval(timer); timer = null; };
     const start = () => {
       stop();
-      if (!userPaused && !hoverPaused) timer = setInterval(() => go(1), 8000);
+      if (!userPaused && !hoverPaused) timer = setInterval(() => { announce(false); go(1); }, 8000);
     };
     const syncPlayButton = () => {
       el.play.setAttribute('aria-pressed', String(userPaused));
@@ -122,8 +125,8 @@
       el.play.querySelector('use').setAttribute('href', userPaused ? '#i-play' : '#i-pause');
     };
 
-    el.prev.addEventListener('click', () => { go(-1); start(); });
-    el.next.addEventListener('click', () => { go(1); start(); });
+    el.prev.addEventListener('click', () => { announce(true); go(-1); start(); });
+    el.next.addEventListener('click', () => { announce(true); go(1); start(); });
     el.play.addEventListener('click', () => { userPaused = !userPaused; syncPlayButton(); start(); });
     revision.addEventListener('mouseenter', () => { hoverPaused = true; stop(); });
     revision.addEventListener('mouseleave', () => { hoverPaused = false; start(); });
@@ -159,7 +162,10 @@
   const compare = $('#compare');
   const range = $('#compare-range');
   if (compare && range) {
-    const update = () => compare.style.setProperty('--pos', `${range.value}%`);
+    const update = () => {
+      compare.style.setProperty('--pos', `${range.value}%`);
+      range.setAttribute('aria-valuetext', `Informativa tradizionale ${range.value}%, informativa progettata ${100 - range.value}%`);
+    };
     // On phones the halves are too narrow to read side by side: open on the "before"
     // page with a sliver of the "after", so the drag tells the story.
     if (window.matchMedia('(max-width: 699px)').matches) range.value = '82';
@@ -169,11 +175,16 @@
 
   /* ---------- Lab 4.2: dark vs fair pattern ---------- */
   const pattern = $('#pattern');
+  const bannerAlt = {
+    dark: 'Banner cookie con dark pattern: un grande pulsante Accetta e continua, caselle già spuntate e un piccolo link altre opzioni al posto del pulsante Rifiuta.',
+    fair: 'Banner cookie con fair pattern: pulsanti Rifiuta tutto e Accetta tutto della stessa dimensione, interruttori spenti con lo scopo di ogni cookie e un pulsante Chiudi e rifiuta.'
+  };
   $$('.seg-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       const mode = btn.dataset.pattern;
       $$('.seg-btn').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
       pattern.dataset.mode = mode;
+      $('#browser').setAttribute('aria-label', bannerAlt[mode]);
       $('#cookie-dark').hidden = mode !== 'dark';
       $('#notes-dark').hidden = mode !== 'dark';
       $('#cookie-fair').hidden = mode !== 'fair';
@@ -278,6 +289,7 @@
       fields.forEach((f) => {
         const ok = f.value.trim() !== '' && f.checkValidity();
         f.setAttribute('aria-invalid', String(!ok));
+        if (ok) f.removeAttribute('aria-describedby'); else f.setAttribute('aria-describedby', 'form-status');
         if (!ok && !firstInvalid) firstInvalid = f;
       });
       if (firstInvalid) {
@@ -324,7 +336,10 @@
     });
 
     $$('#f-name, #f-email').forEach((f) => f.addEventListener('input', () => {
-      if (f.getAttribute('aria-invalid') === 'true' && f.value.trim() && f.checkValidity()) f.setAttribute('aria-invalid', 'false');
+      if (f.getAttribute('aria-invalid') === 'true' && f.value.trim() && f.checkValidity()) {
+        f.setAttribute('aria-invalid', 'false');
+        f.removeAttribute('aria-describedby');
+      }
     }));
   }
 

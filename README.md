@@ -1,4 +1,4 @@
-# Codice Umano · Legal Product Design
+# Legal Product Studio · Law, by design.
 
 Sito one-page per uno studio che porta il **giurista designer** dentro i team di prodotto digitali: legal design, Value Sensitive Design e FRIA, accessibilità (European Accessibility Act) e audit dei dark pattern.
 
@@ -41,9 +41,9 @@ assets/img/             favicon e immagine di anteprima per i social
 
 ## Prima di andare online
 
-1. **Dati dello studio.** Sostituisci `ciao@codiceumano.it` (compare in `index.html` e nell'attributo `data-email` del modulo), `P.IVA 00000000000` nel footer e `[ragione sociale e indirizzo]` nella finestra "Privacy in breve".
+1. **Dati dello studio.** Verifica l'indirizzo `ciao@legalproductstudio.tech` (compare in `index.html` e nell'attributo `data-email` del modulo) e sostituisci `P.IVA 00000000000` nel footer e `[ragione sociale e indirizzo]` nella finestra "Privacy in breve".
 2. **Modulo contatti.** Senza configurazione apre il programma di posta del visitatore con la richiesta già compilata. Per ricevere le richieste direttamente, imposta nel `<form id="contact-form">` l'attributo `data-endpoint` con l'URL di un servizio di form (per esempio Formspree): il modulo invierà i dati in POST.
-3. **Nome del brand.** "Codice Umano" è un nome di lavoro: codice come codice civile e codice sorgente, umano come il Value Sensitive Design.
+3. **Marchio.** Il wordmark "Legal Product Studio" è composto nel carattere del sito (Atkinson Hyperlegible) per restare leggibile. Se preferisci il logo ufficiale di legalproductstudio.tech, sostituisci `.brand-name` con il file del logo e un `alt` "Legal Product Studio".
 4. **Contenuti legali.** I riferimenti normativi (art. 7 e 83 GDPR, art. 50 e 99 AI Act, Direttiva (UE) 2019/882 e D.Lgs. 82/2022, art. 33 Codice del Consumo, linee guida EDPB e Garante) vanno fatti rivedere dal giurista dello studio prima della pubblicazione.
 
 ## Scelte di progetto

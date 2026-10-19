@@ -57,4 +57,12 @@ assets/img/             favicon e immagine di anteprima per i social
 
 ## Pubblicazione
 
-Funziona su qualsiasi hosting statico. Con GitHub Pages: *Settings → Pages → Deploy from a branch*, cartella root.
+Funziona su qualsiasi hosting statico. Il file `.nojekyll` dice a GitHub Pages di servire i file così come sono.
+
+Con GitHub Pages:
+
+1. Apri *Settings → Pages* del repository.
+2. In *Build and deployment* scegli *Source: Deploy from a branch*.
+3. Seleziona il branch con il sito e la cartella `/ (root)`, poi *Save*.
+
+Dopo uno o due minuti il sito è online su `https://mikpozzo93.github.io/sitoweb2/`. Se colleghi un dominio tuo (per esempio `legalproductstudio.tech`), aggiorna anche `og:url` e `og:image` in `index.html`.

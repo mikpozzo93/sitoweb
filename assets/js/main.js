@@ -343,6 +343,73 @@
     }));
   }
 
+  /* ---------- Workshop: register interest ---------- */
+  const wsForm = $('#ws-form');
+  if (wsForm) {
+    const wsStatus = $('#ws-status');
+    const wsEmail = wsForm.dataset.email;
+    const say = (msg) => { wsStatus.textContent = msg; wsStatus.hidden = false; };
+
+    wsForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fields = [$('#w-name'), $('#w-email')];
+      let firstInvalid = null;
+      fields.forEach((f) => {
+        const ok = f.value.trim() !== '' && f.checkValidity();
+        f.setAttribute('aria-invalid', String(!ok));
+        if (ok) f.removeAttribute('aria-describedby'); else f.setAttribute('aria-describedby', 'ws-status');
+        if (!ok && !firstInvalid) firstInvalid = f;
+      });
+      if (firstInvalid) {
+        say(firstInvalid.id === 'w-email' && firstInvalid.value.trim()
+          ? "Controlla l'email: sembra incompleta, per esempio manca la @."
+          : 'Inserisci nome ed email di lavoro, così posso avvisarti.');
+        firstInvalid.focus();
+        return;
+      }
+
+      if (isPreview) {
+        say("Questa è un'anteprima: il modulo non invia dati. Sul sito pubblicato l'iscrizione arriva direttamente allo studio.");
+        return;
+      }
+
+      const data = new FormData(wsForm);
+      const endpoint = wsForm.dataset.endpoint;
+      if (endpoint) {
+        try {
+          const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+          if (!res.ok) throw new Error(String(res.status));
+          wsForm.reset();
+          say('Fatto: sei nella lista. Ti scrivo appena sono fissati data e luogo.');
+          return;
+        } catch (err) {
+          say(`Non sono riuscito a registrare la richiesta. Riprova tra poco oppure scrivi a ${wsEmail}.`);
+          return;
+        }
+      }
+
+      const temi = data.getAll('temi');
+      const body = [
+        `Nome: ${data.get('nome')}`,
+        `Email: ${data.get('email')}`,
+        `Azienda: ${data.get('azienda') || '-'}`,
+        `Ruolo: ${data.get('ruolo') || '-'}`,
+        `Persone dal team: ${data.get('persone') || '-'}`,
+        `Temi di interesse: ${temi.length ? temi.join(', ') : '-'}`
+      ].join('\n');
+      const subject = `Workshop · ${data.get('azienda') || data.get('nome')}`;
+      window.location.href = `mailto:${wsEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      say(`Ho preparato l'email nel tuo programma di posta: inviala per completare l'iscrizione. Se non si è aperto, scrivi a ${wsEmail}.`);
+    });
+
+    $$('#w-name, #w-email').forEach((f) => f.addEventListener('input', () => {
+      if (f.getAttribute('aria-invalid') === 'true' && f.value.trim() && f.checkValidity()) {
+        f.setAttribute('aria-invalid', 'false');
+        f.removeAttribute('aria-describedby');
+      }
+    }));
+  }
+
   /* ---------- Copy email ---------- */
   const copyBtn = $('#copy-email');
   if (copyBtn) {
@@ -441,9 +508,9 @@
     };
 
     const groups = [
-      ['.article-head > div:first-child, .section-head, .manifesto-copy, .value-copy, .checkup-intro, .band-copy, .lab-intro, .service-strip, .compare-table-wrap, .footer-mark', 'single'],
-      ['.margin-notes .comment, .pain, .stake, .comma, .service, .step, .value, .q, .faq', 'stagger'],
-      ['.cost-chart, .team, .compare, .pattern, .story, .contact', 'scale'],
+      ['.article-head > div:first-child, .section-head, .manifesto-copy, .value-copy, .checkup-intro, .band-copy, .lab-intro, .service-strip, .compare-table-wrap, .footer-mark, .formulas-head, .workshop-copy, .about-copy, .about-not > .h3', 'single'],
+      ['.margin-notes .comment, .pain, .stake, .comma, .service, .step, .value, .q, .faq, .formula, .topic', 'stagger'],
+      ['.cost-chart, .team, .compare, .pattern, .story, .contact, .about-card', 'scale'],
     ];
     const targets = [];
     groups.forEach(([sel, kind]) => $$(sel).forEach((el) => {

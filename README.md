@@ -15,6 +15,7 @@ python3 -m http.server 8000
 
 ```
 index.html              pagina unica
+varianti/               varianti A (più pagine) e B (pagina compatta), generate da index.html
 assets/css/fonts.css    @font-face dei caratteri ospitati in locale
 assets/css/styles.css   design token (colori, tipografia, spazi) e stili
 assets/js/main.js       interazioni (revisioni nell'hero, slider prima/dopo,
@@ -40,6 +41,22 @@ assets/img/             favicon e immagine di anteprima per i social
 | `#checkup` | Autovalutazione "compliant o virtuoso?" con timbro finale |
 | `#faq` | Art. 7: domande frequenti |
 | `#contatti` | Modulo per la Discovery Call |
+
+## Varianti A/B della struttura
+
+La pagina unica è lunga (circa 20 schermate su desktop, 35 su telefono). In `varianti/` ci sono due modi di accorciarla, con gli stessi testi:
+
+| Variante | Struttura | Lunghezza (desktop · telefono) |
+| --- | --- | --- |
+| Attuale (`index.html`) | Una pagina con tutte le sezioni aperte | 19,8 · 35,3 schermate |
+| **A** (`varianti/a/`) | Home breve con un riassunto per sezione, più sei pagine: Approccio, Servizi, Laboratorio, Workshop, Chi sono, Contatti (con le FAQ) | home 6,1 · 11,4; pagine interne da 1,8 a 6,5 su desktop |
+| **B** (`varianti/b/`) | Una pagina compatta: servizi e laboratorio diventano schede, il team e i principi, il programma del workshop e il confronto con la consulenza si aprono a richiesta | 13,0 · 23,7 schermate |
+
+`varianti/index.html` mette le due varianti a confronto. Le pagine delle varianti hanno `noindex`, così non finiscono nei motori di ricerca.
+
+Le varianti si generano da `index.html`: dopo aver cambiato un testo nel sito, esegui `python3 varianti/genera.py`. I link interni funzionano anche dentro le schede e i riquadri chiusi: un link a `#checkup` apre la scheda "Autovalutazione", un link a `#confronto` apre il riquadro. Nella variante A, "Parliamone" sotto un servizio apre i contatti con quel servizio già selezionato (`contatti.html#vsd`).
+
+Quando scegli la variante, la si sposta nella radice del sito e si cancella la cartella `varianti/`.
 
 ## Prima di andare online
 

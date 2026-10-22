@@ -32,9 +32,10 @@
     const spy = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        navLinks.forEach((a) => a.removeAttribute('aria-current'));
         const link = byId.get(entry.target.id);
-        if (link) link.setAttribute('aria-current', 'true');
+        if (!link) return;
+        navLinks.forEach((a) => { if (a.getAttribute('aria-current') !== 'page') a.removeAttribute('aria-current'); });
+        link.setAttribute('aria-current', 'true');
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
     $$('main section[id]').forEach((s) => spy.observe(s));
@@ -192,10 +193,10 @@
     });
   });
 
-  /* ---------- Lab 4.3: tabs ---------- */
-  const tabs = $$('[role="tab"]');
+  /* ---------- Tabs: each tablist is its own group ---------- */
   const selectTab = (tab, focus) => {
-    tabs.forEach((t) => {
+    const group = $$('[role="tab"]', tab.closest('[role="tablist"]'));
+    group.forEach((t) => {
       const on = t === tab;
       t.setAttribute('aria-selected', String(on));
       t.tabIndex = on ? 0 : -1;
@@ -203,15 +204,39 @@
     });
     if (focus) tab.focus();
   };
-  tabs.forEach((tab, i) => {
-    tab.addEventListener('click', () => selectTab(tab, false));
-    tab.addEventListener('keydown', (e) => {
-      const keys = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 };
-      if (!(e.key in keys)) return;
-      e.preventDefault();
-      selectTab(tabs[(keys[e.key] + tabs.length) % tabs.length], true);
+  $$('[role="tablist"]').forEach((list) => {
+    const group = $$('[role="tab"]', list);
+    group.forEach((tab, i) => {
+      tab.addEventListener('click', () => selectTab(tab, false));
+      tab.addEventListener('keydown', (e) => {
+        const keys = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: group.length - 1 };
+        if (!(e.key in keys)) return;
+        e.preventDefault();
+        selectTab(group[(keys[e.key] + group.length) % group.length], true);
+      });
     });
   });
+
+  // A link to something inside a closed tab or fold opens it first, then scrolls there.
+  const reveal = (id) => {
+    const target = id && /^[A-Za-z][\w-]*$/.test(id) ? document.getElementById(id) : null;
+    if (!target) return false;
+    let opened = false;
+    for (let panel = target.closest('[role="tabpanel"][hidden]'); panel; panel = panel.parentElement && panel.parentElement.closest('[role="tabpanel"][hidden]')) {
+      const tab = document.querySelector(`[role="tab"][aria-controls="${panel.id}"]`);
+      if (tab) { selectTab(tab, false); opened = true; }
+    }
+    const fold = target.closest('details:not([open])');
+    if (fold) { fold.open = true; opened = true; }
+    if (opened) requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+    return opened;
+  };
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (a && reveal(a.getAttribute('href').slice(1))) e.preventDefault();
+  });
+  reveal(location.hash.slice(1));
+  window.addEventListener('hashchange', () => reveal(location.hash.slice(1)));
 
   /* ---------- Self-assessment: compliant or virtuoso ---------- */
   const quiz = $('#quiz');
@@ -278,6 +303,11 @@
   });
 
   if (form) {
+    const wanted = location.hash.slice(1);
+    if (/^[a-z0-9]+$/.test(wanted)) {
+      const box = form.querySelector(`input[type="checkbox"][data-service="${wanted}"]`);
+      if (box) box.checked = true;
+    }
     const status = $('#form-status');
     const email = form.dataset.email;
     const showStatus = (msg) => { status.textContent = msg; status.hidden = false; };
@@ -448,17 +478,19 @@
   /* ---------- Mobile sticky CTA ---------- */
   const mobileCta = $('#mobile-cta');
   if (mobileCta && 'IntersectionObserver' in window) {
-    const seen = { hero: true, contact: false };
-    const sync = () => mobileCta.classList.toggle('is-visible', !seen.hero && !seen.contact);
+    const top = $('#top') || $('main h1');
+    const contact = $('#contatti');
+    const seen = { top: true, contact: false };
+    const sync = () => mobileCta.classList.toggle('is-visible', !seen.top && !seen.contact);
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.target.id === 'top') seen.hero = entry.isIntersecting;
-        if (entry.target.id === 'contatti') seen.contact = entry.isIntersecting;
+        if (entry.target === top) seen.top = entry.isIntersecting;
+        if (entry.target === contact) seen.contact = entry.isIntersecting;
       });
       sync();
     });
-    io.observe($('#top'));
-    io.observe($('#contatti'));
+    if (top) io.observe(top);
+    if (contact) io.observe(contact);
   }
 
   /* ---------- Motion: reveals, count-ups, lit statement, slider pass ----------

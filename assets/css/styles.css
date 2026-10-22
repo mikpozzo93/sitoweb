@@ -39,13 +39,17 @@
   --f-body: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "Atkinson Hyperlegible Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
+  /* Type scale (phone → desktop): labels 14, secondary 16, body 17→18, lead 18→21,
+     card titles 22→28, section titles 30→48, hero 38→68; figures 36→48 */
   --t-xs: 0.875rem;
-  --t-sm: 0.9375rem;
-  --t-md: 1.0625rem;
-  --t-lg: 1.25rem;
-  --t-xl: clamp(1.5rem, 1.2rem + 1.1vw, 2rem);
-  --t-2xl: clamp(2.1rem, 1.4rem + 2.8vw, 3.6rem);
-  --t-hero: clamp(2.5rem, 1.4rem + 4.4vw, 5.2rem);
+  --t-sm: 1rem;
+  --t-md: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+  --t-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --t-xl: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+  --t-2xl: clamp(1.875rem, 1.35rem + 2.1vw, 3rem);
+  --t-hero: clamp(2.375rem, 1.35rem + 3.7vw, 4.25rem);
+  --t-num: clamp(2.25rem, 1.7rem + 1.8vw, 3rem);
+  --t-statement: clamp(1.5rem, 1.05rem + 1.8vw, 2.25rem);
 
   --s-1: 0.25rem;
   --s-2: 0.5rem;
@@ -155,7 +159,7 @@ em, i { font-style: normal; }
   font-size: var(--t-lg);
   line-height: 1.55;
   color: var(--ink-2);
-  max-width: 62ch;
+  max-width: 54ch;
   margin-top: var(--s-5);
 }
 .strike {
@@ -235,7 +239,7 @@ em, i { font-style: normal; }
   padding-bottom: 2px;
 }
 .brand-name {
-  font-family: var(--f-display); font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em;
+  font-family: var(--f-display); font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em;
 }
 .brand-studio { color: var(--accent); }
 @media (max-width: 480px) {
@@ -334,7 +338,7 @@ em, i { font-style: normal; }
   font-size: var(--t-lg);
   line-height: 1.55;
   color: var(--ink-2);
-  max-width: 56ch;
+  max-width: 52ch;
 }
 .hero-proof { display: grid; gap: var(--s-2); margin-top: var(--s-5); }
 .hero-proof li { display: flex; align-items: flex-start; gap: var(--s-2); font-weight: 600; }
@@ -527,7 +531,7 @@ em, i { font-style: normal; }
 }
 .stake:first-child { padding-top: 0; }
 .stake dt {
-  font-family: var(--f-display); font-size: clamp(2.2rem, 1.6rem + 2vw, 3.2rem); line-height: 1;
+  font-family: var(--f-display); font-size: var(--t-num); line-height: 1;
   font-variant-numeric: tabular-nums lining-nums; font-weight: 600; white-space: nowrap;
 }
 .stake dd { margin: 0; color: var(--ink-2); font-size: var(--t-sm); max-width: 46ch; }
@@ -557,7 +561,7 @@ em, i { font-style: normal; }
   padding: var(--s-3);
 }
 .team-center-label { font-family: var(--f-mono); font-size: 0.875rem; letter-spacing: 0.01em; color: var(--ink-2); }
-.team-center-name { font-family: var(--f-display); font-size: clamp(1rem, 0.8rem + 0.8vw, 1.3rem); line-height: 1.15; font-style: normal; }
+.team-center-name { font-family: var(--f-display); font-size: var(--t-lg); line-height: 1.2; font-style: normal; }
 .team-node {
   --a: calc(var(--i) * 72deg - 90deg);
   position: absolute;
@@ -844,7 +848,7 @@ em, i { font-style: normal; }
 .fake-check.is-on::after { content: ""; position: absolute; left: 4px; top: 1px; width: 4px; height: 8px; border: solid var(--surface); border-width: 0 2px 2px 0; transform: rotate(45deg); }
 .cookie-actions { display: flex; align-items: center; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
 .fake-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); font-weight: 700; padding: 12px 18px; }
-.fake-btn-huge { flex: 1 1 220px; background: var(--good); color: var(--surface); font-size: 1.05rem; padding-block: 15px; }
+.fake-btn-huge { flex: 1 1 220px; background: var(--good); color: var(--surface); font-size: var(--t-md); padding-block: 15px; }
 .fake-link { position: relative; font-size: 0.875rem; color: var(--ink-2); padding-right: 34px; }
 .cookie-close { position: absolute; top: 12px; right: 14px; display: inline-flex; align-items: center; gap: 4px; font-size: 0.875rem; font-weight: 700; color: var(--ink-2); padding-right: 0; }
 .cookie-close svg { width: 16px; height: 16px; }
@@ -964,7 +968,7 @@ em, i { font-style: normal; }
   content: ""; position: absolute; top: -7px; left: 0; width: 12px; height: 12px; border-radius: 50%;
   background: var(--band); box-shadow: 0 0 0 4px var(--paper);
 }
-.step-num { font-family: var(--f-display); font-size: 3.2rem; line-height: 1; color: var(--accent); font-style: normal; font-variant-numeric: lining-nums; }
+.step-num { font-family: var(--f-display); font-size: var(--t-num); line-height: 1; color: var(--accent); font-style: normal; font-variant-numeric: lining-nums; }
 .step h3 { margin-top: var(--s-3); font-family: var(--f-display); font-size: var(--t-xl); }
 .step p { margin-top: var(--s-2); color: var(--ink-2); }
 .step .step-out { margin-top: auto; padding-top: var(--s-4); color: var(--ink); font-weight: 700; }
@@ -1017,10 +1021,10 @@ em, i { font-style: normal; }
   transform: rotate(-9deg);
 }
 .stamp-ring { position: absolute; inset: 9px; border-radius: 50%; border: 1.5px dashed var(--stamp); }
-.stamp-word { font-family: var(--f-display); font-weight: 700; font-size: 1.55rem; letter-spacing: 0.01em; line-height: 1; }
+.stamp-word { font-family: var(--f-display); font-weight: 700; font-size: 1.375rem; letter-spacing: 0.01em; line-height: 1; }
 .stamp-score { font-family: var(--f-mono); font-size: 0.875rem; font-variant-numeric: tabular-nums; font-weight: 700; }
 .stamp[data-state="empty"] { color: var(--ink-2); --stamp: var(--line); }
-.stamp[data-state="empty"] .stamp-word { font-size: 1.15rem; font-weight: 500; }
+.stamp[data-state="empty"] .stamp-word { font-size: var(--t-lg); font-weight: 500; }
 .stamp[data-state="virtuoso"] { --stamp: var(--accent); }
 .stamp[data-state="compliant"] { --stamp: var(--ink); }
 .stamp[data-state="rischio"] { --stamp: var(--redline); }
@@ -1172,7 +1176,7 @@ em, i { font-style: normal; }
 .site-footer { background: var(--paper-2); padding-top: var(--s-8); padding-bottom: calc(var(--s-6) + env(safe-area-inset-bottom, 0px)); overflow: hidden; }
 .footer-mark {
   font-family: var(--f-display); font-weight: 500; letter-spacing: -0.03em; line-height: 1;
-  font-size: clamp(2.2rem, 0.6rem + 6.6vw, 6.4rem);
+  font-size: clamp(2rem, 0.6rem + 5.4vw, 5rem);
   text-wrap: balance;
 }
 .footer-mark span { color: var(--accent); }
@@ -1233,7 +1237,7 @@ em, i { font-style: normal; }
 .privacy-actions { margin-top: var(--s-5); display: flex; justify-content: flex-end; }
 
 /* ---------- Headings: one accessible family, set in bold ---------- */
-.hero-title { font-weight: 800; letter-spacing: -0.015em; line-height: 1.04; }
+.hero-title { font-weight: 700; letter-spacing: -0.015em; line-height: 1.06; }
 .h2, .h3, .pain h3, .comma h3, .service-title, .cost-title, .step h3, .value dt, .faq summary,
 .stamp-title, .pui-title, .stake dt, .step-num, .norm-quote, .team-center-name, .norms-list li,
 .direct-email, .brand-name, .footer-mark, .stamp-word { font-weight: 700; }
@@ -1242,8 +1246,7 @@ em, i { font-style: normal; }
 .faq summary { font-size: var(--t-lg); line-height: 1.35; }
 .norms-list li { font-size: var(--t-md); }
 .norm-quote { font-size: var(--t-lg); line-height: 1.4; }
-.team-center-name { font-size: clamp(1rem, 0.85rem + 0.6vw, 1.2rem); }
-.stamp-word { font-size: 1.35rem; letter-spacing: 0.01em; }
+.stamp-word { letter-spacing: 0.01em; }
 
 /* ---------- Motion ----------
    Added only when the visitor has not asked for reduced motion (class "motion"
@@ -1253,8 +1256,8 @@ em, i { font-style: normal; }
 .statement {
   margin-top: var(--s-8);
   max-width: 24em;
-  font-size: clamp(1.6rem, 1rem + 2.2vw, 2.75rem);
-  font-weight: 700; line-height: 1.22; letter-spacing: -0.01em;
+  font-size: var(--t-statement);
+  font-weight: 700; line-height: 1.25; letter-spacing: -0.01em;
   color: var(--ink);
   text-wrap: pretty;
 }
